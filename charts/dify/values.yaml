@@ -78,7 +78,13 @@ image:
 api:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1Gi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -269,7 +275,7 @@ api:
       ## ReadWriteMany access mode required for `api` and `worker`
       ##
       storageClass:
-      accessModes: ReadWriteMany
+      accessModes: ReadWriteOnce
       size: 5Gi
       subPath: ""
   ## Dify API ServiceAccount configuration
@@ -292,7 +298,13 @@ api:
 worker:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1Gi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -423,7 +435,13 @@ beat:
 proxy:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -468,7 +486,7 @@ proxy:
         ## ReadWriteMany access mode required for nginx
         ##
         storageClass:
-        accessModes: ReadWriteMany
+        accessModes: ReadWriteOnce
         size: 1Gi
         subPath: ""
   ## Proxy ServiceAccount configuration
@@ -491,7 +509,13 @@ proxy:
 web:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -573,7 +597,13 @@ web:
 sandbox:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -667,7 +697,13 @@ sandbox:
 ssrfProxy:
   enabled: false
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -710,7 +746,7 @@ ssrfProxy:
         ## ReadWriteMany access mode required for squid
         ##
         storageClass:
-        accessModes: ReadWriteMany
+        accessModes: ReadWriteOnce
         size: 1Gi
         subPath: ""
   service:
@@ -738,7 +774,13 @@ ssrfProxy:
 pluginDaemon:
   enabled: true
   replicas: 1
-  resources: {}
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -792,7 +834,7 @@ pluginDaemon:
       ## ReadWriteMany access mode required for `pluginDaemon`
       ##
       storageClass:
-      accessModes: ReadWriteMany
+      accessModes: ReadWriteOnce
       size: 5Gi
       subPath: ""
   marketplace:
@@ -842,8 +884,12 @@ postgresql:
   ##
   primary:
     resources:
-      limits: {}
-      requests: {}
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+      limits:
+        cpu: "1000m"
+        memory: "2Gi"
     persistence:
       enabled: true
       ## @param primary.persistence.existingClaim Name of an existing PVC to use
@@ -872,8 +918,12 @@ postgresql:
     name: read
     replicaCount: 1
     resources:
-      limits: {}
-      requests: {}
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+      limits:
+        cpu: "1000m"
+        memory: "2Gi"
     persistence:
       enabled: true
       ## @param readReplicas.persistence.existingClaim Name of an existing PVC to use
@@ -980,13 +1030,13 @@ weaviate:
     # and re-creating them in parallel all at once.
     # rollingUpdate:
     #   maxUnavailable: 100%
-  resources: {}
-    # requests:
-    #   cpu: '500m'
-    #   memory: '300Mi'
-    # limits:
-    #   cpu: '1000m'
-    #   memory: '1Gi'
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
 
   # security Context for the Weaviate Pods. The configurations are the same as setting them
   # as described here: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
@@ -1488,7 +1538,7 @@ weaviate:
   globalPriorityClassName: ""
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 ingress:
@@ -1796,8 +1846,12 @@ redis:
     ## @param master.resources.requests The requested resources for the Redis&reg; master containers
     ##
     resources:
-      limits: {}
-      requests: {}
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "1Gi"
     ## Configure Pods Security Context
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
     ## @param master.podSecurityContext.enabled Enabled Redis&reg; master pods' Security Context
@@ -2205,16 +2259,16 @@ redis:
     ## @param replica.resources.requests The requested resources for the Redis&reg; replicas containers
     ##
     resources:
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "1Gi"
       # We usually recommend not to specify default resources and to leave this as a conscious
       # choice for the user. This also increases chances charts run on environments with little
       # resources, such as Minikube. If you do want to specify resources, uncomment the following
       # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-      limits: {}
-      #   cpu: 250m
-      #   memory: 256Mi
-      requests: {}
-      #   cpu: 250m
-      #   memory: 256Mi
     ## Configure Pods Security Context
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
     ## @param replica.podSecurityContext.enabled Enabled Redis&reg; replicas pods' Security Context
