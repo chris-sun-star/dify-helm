@@ -699,7 +699,12 @@ cache_store_log none
 {{- end }}
 
 {{- define "dify.pluginDaemon.db.config" -}}
-{{- if .Values.externalPostgres.enabled }}
+{{- if .Values.seekdb.enabled }}
+DB_TYPE: mysql
+DB_HOST: {{ .Release.Name }}-seekdb-sql
+DB_PORT: "2881"
+DB_DATABASE: {{ .Values.seekdb.seekdb.database | default "dify" | quote }}
+{{- else if .Values.externalPostgres.enabled }}
 DB_TYPE: postgresql
 DB_HOST: {{ .Values.externalPostgres.address | quote }}
 DB_PORT: {{ .Values.externalPostgres.port | toString | quote }}

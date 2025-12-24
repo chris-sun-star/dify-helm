@@ -8,5 +8,8 @@ dependencies:
 - name: weaviate
   repository: https://weaviate.github.io/weaviate-helm
   version: 17.3.3
-digest: sha256:b0096852b46655effd19195b34f08d9152419fa5fc4ae2fdda16617e22cf30c1
-generated: "2025-10-24T20:30:01.080791302+08:00"
+- name: seekdb
+  repository: https://chris-sun-star.github.io/oceanbase-docker-images
+  version: 0.1.1
+digest: sha256:fd0f1c94d55ab958ccdbccfac4704dae6695e21f6ff3dc9e141debdac1144f10
+generated: "2025-12-24T14:23:54.773623+08:00"

@@ -865,9 +865,37 @@ seekdb:
   seekdb:
     rootPassword: "difyai123456"
     database: "dify"
+    # Environment variables for seekdb configuration
+    config:
+      cpuCount: ""      # e.g., 4
+      memoryLimit: ""   # e.g., 2G
+      logDiskSize: ""   # e.g., 2G
+      datafileSize: ""  # e.g., 2G
+      datafileNext: ""  # e.g., 2G
+      datafileMaxSize: "" # e.g., 50G
   service:
     sql:
+      enabled: true
+      type: ClusterIP
       port: 2881
+      annotations: {}
+    obshell:
+      enabled: true
+      type: NodePort
+      port: 2886
+      annotations: {}
+  persistence:
+    enabled: true
+    # storageClass: "-"
+    accessMode: ReadWriteOnce
+    size: 50Gi
+  resources:
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 1
+      memory: 2Gi
 
 postgresql:
   enabled: false
