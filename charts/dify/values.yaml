@@ -8,7 +8,7 @@
 image:
   api:
     repository: langgenius/dify-api
-    tag: "1.10.1-fix.1"
+    tag: "1.11.1"
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -19,7 +19,7 @@ image:
 
   web:
     repository: langgenius/dify-web
-    tag: "1.10.1-fix.1"
+    tag: "1.11.1"
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
@@ -861,7 +861,7 @@ pluginDaemon:
     annotations: {}
 
 postgresql:
-  enabled: true
+  enabled: false
   name: postgres
   global:
     storageClass: ""
@@ -946,7 +946,7 @@ postgresql:
     tolerations: []
 
 weaviate:
-  enabled: true
+  enabled: false
   image:
     # registry where weaviate image is stored
     registry: cr.weaviate.io

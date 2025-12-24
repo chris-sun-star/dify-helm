@@ -22,7 +22,7 @@ version: 0.34.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.10.1-fix.1"
+appVersion: "1.11.1"
 
 dependencies:
 - name: postgresql
@@ -42,5 +42,14 @@ dependencies:
   repository: https://weaviate.github.io/weaviate-helm
   condition: weaviate.enabled
   tags:
+    - vector
+    - search
+- name: seekdb
+  version: 0.1.1
+  repository: https://chris-sun-star.github.io/oceanbase-docker-images
+  condition: seekdb.enabled
+  tags:
+    - seekdb
+    - mysql
     - vector
     - search
