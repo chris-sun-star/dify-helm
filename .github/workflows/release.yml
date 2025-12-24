@@ -39,6 +39,7 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add weaviate https://weaviate.github.io/weaviate-helm
+          helm repo add seekdb https://chris-sun-star.github.io/oceanbase-docker-images
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
