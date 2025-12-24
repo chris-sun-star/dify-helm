@@ -179,7 +179,12 @@ MARKETPLACE_URL: {{ .Values.api.url.marketplace | quote }}
 {{- end }}
 
 {{- define "dify.db.config" -}}
-{{- if .Values.externalPostgres.enabled }}
+{{- if .Values.seekdb.enabled }}
+DB_TYPE: mysql
+DB_HOST: {{ .Release.Name }}-seekdb-sql
+DB_PORT: "2881"
+DB_DATABASE: {{ .Values.seekdb.seekdb.database | default "dify" | quote }}
+{{- else if .Values.externalPostgres.enabled }}
 DB_TYPE: postgresql
 # DB_USERNAME: {{ .Values.externalPostgres.username | quote }}
 # DB_PASSWORD: {{ .Values.externalPostgres.password | quote }}
@@ -396,7 +401,9 @@ CELERY_USE_SENTINEL: "true"
 {{- end }}
 
 {{- define "dify.vectordb.config" -}}
-{{- if .Values.externalWeaviate.enabled }}
+{{- if .Values.seekdb.enabled }}
+VECTOR_STORE: oceanbase
+{{- else if .Values.externalWeaviate.enabled }}
 # The type of vector store to use. Supported values are `weaviate`, `qdrant`, `milvus`, `pgvector`, `tencent`, `myscale`.
 VECTOR_STORE: weaviate
 # The Weaviate endpoint URL. Only available when VECTOR_STORE is `weaviate`.

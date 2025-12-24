@@ -860,6 +860,15 @@ pluginDaemon:
     ##
     annotations: {}
 
+seekdb:
+  enabled: true
+  seekdb:
+    rootPassword: "difyai123456"
+    database: "dify"
+  service:
+    sql:
+      port: 2881
+
 postgresql:
   enabled: false
   name: postgres

@@ -50,7 +50,10 @@ OTLP_API_KEY: {{ .Values.api.otel.apiKey | b64enc | quote }}
 {{- end }}
 
 {{- define "dify.db.credentials" -}}
-{{- if .Values.externalPostgres.enabled }}
+{{- if .Values.seekdb.enabled }}
+DB_USERNAME: {{ "root" | b64enc | quote }}
+DB_PASSWORD: {{ .Values.seekdb.seekdb.rootPassword | default "" | b64enc | quote }}
+{{- else if .Values.externalPostgres.enabled }}
 DB_USERNAME: {{ .Values.externalPostgres.username | b64enc | quote }}
 DB_PASSWORD: {{ .Values.externalPostgres.password | b64enc | quote }}
 {{- else if .Values.externalMysql.enabled }}
