@@ -46,7 +46,7 @@ dependencies:
     - search
 - name: seekdb
   version: 0.1.1
-  repository: https://chris-sun-star.github.io/oceanbase-docker-images
+  repository: https://oceanbase.github.io/oceanbase-docker-images
   condition: seekdb.enabled
   tags:
     - seekdb
