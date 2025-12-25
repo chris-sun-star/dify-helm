@@ -3,6 +3,45 @@ entries:
   dify:
   - apiVersion: v2
     appVersion: 1.11.1
+    created: "2025-12-25T06:51:50.629482605Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - postgres
+      version: 12.5.6
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - redis
+      version: 16.13.2
+    - condition: weaviate.enabled
+      name: weaviate
+      repository: https://weaviate.github.io/weaviate-helm
+      tags:
+      - vector
+      - search
+      version: 17.3.3
+    - condition: seekdb.enabled
+      name: seekdb
+      repository: https://chris-sun-star.github.io/oceanbase-docker-images
+      tags:
+      - seekdb
+      - mysql
+      - vector
+      - search
+      version: 0.1.1
+    description: Instant cloud deployment for https://github.com/langgenius/dify.
+    digest: 4402fe434c83902d9be14df6d10f9fd50b408a0aa1b0ffa7da2e0db9789e47e5
+    name: dify
+    type: application
+    urls:
+    - https://github.com/chris-sun-star/dify-helm/releases/download/dify-0.34.2/dify-0.34.2.tgz
+    version: 0.34.2
+  - apiVersion: v2
+    appVersion: 1.11.1
     created: "2025-12-25T03:05:22.496812983Z"
     dependencies:
     - condition: postgresql.enabled
@@ -40,4 +79,4 @@ entries:
     urls:
     - https://github.com/chris-sun-star/dify-helm/releases/download/dify-0.34.1/dify-0.34.1.tgz
     version: 0.34.1
-generated: "2025-12-25T03:05:22.496822841Z"
+generated: "2025-12-25T06:51:50.629500409Z"
