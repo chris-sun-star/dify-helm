@@ -115,11 +115,11 @@ api:
     successThreshold: 1
   ## @param api.startupProbe.enabled Enable startupProbe on API containers
   startupProbe:
-    enabled: false
+    enabled: true
     initialDelaySeconds: 5
     periodSeconds: 10
     timeoutSeconds: 5
-    failureThreshold: 5
+    failureThreshold: 30
     successThreshold: 1
   ## @param api.updateStrategy Update strategy type and configuration parameters
   ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
